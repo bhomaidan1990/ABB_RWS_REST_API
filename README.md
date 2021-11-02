@@ -33,4 +33,4 @@ rws.deactivateLeadThrough("ROB_R")
 
 The functionality in this code is non-exhaustive, to enhance it you can add any get/post functionalities from the [REST-API](https://developercenter.robotstudio.com/api/rwsApi/), if you find it ugly and difficult, you can take a look into a simpler version of the [REST-API-V2.0](https://developercenter.robotstudio.com/api/RWS).
 
-I have implemented a (somehow) generalized simplified way to get and post, through the functions: [getResponse](RWSwrapper.py#L56) and [postResponse](RWSwrapper.py#L84), please fell free to use them to add any functionality that you want  from the **REST API**.
+I have implemented a (somehow) generalized simplified way to get and post, through the functions: [getResponse](RWSwrapper.py#L56) and [postResponse](RWSwrapper.py#L84), please feel free to use them to add any functionality that you want  from the **REST API**.
