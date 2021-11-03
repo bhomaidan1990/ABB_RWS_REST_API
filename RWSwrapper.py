@@ -9,6 +9,7 @@ import requests
 import xml.etree.ElementTree as ET
 import time
 from requests import auth
+from math import pi as PI
 '''
  * This the main class distributed in this package.
  * It is the implementation of a REST Client for using ABB Robot Web Services 1.0 API for the robot Yumi.
@@ -239,7 +240,7 @@ class RWSwrapper:
         @param: mechUnit, string, 'ROB_L' or 'ROB_R'.
         ---
         @return: jointtarget, list of joint values, jointtarget.
-        TODO check if the values in Radian or Degree
+        Angles in Radian to confront with ROS, and the joints order is: [1, 2, 7, 3, 4, 5, 6] to follow ABB
         """
         URI = self.REST_URI+"/rw/motionsystem/mechunits/"+mechUnit+"/jointtarget"
 
@@ -251,22 +252,21 @@ class RWSwrapper:
 
         for child in tree[1].iter('*'):
         	if   child.attrib == {'class': 'rax_1'}:
-        		rax_1 = float(child.text)
+        		rax_1 = round((PI/180) * float(child.text), 4)
         	elif child.attrib == {'class': 'rax_2'}:
-        		rax_2 = float(child.text)
+        		rax_2 =round( (PI/180) * float(child.text), 4)
         	elif child.attrib == {'class': 'rax_3'}:
-        		rax_3 = float(child.text)
+        		rax_3 =round( (PI/180) * float(child.text), 4)
         	elif child.attrib == {'class': 'rax_4'}:
-        		rax_4 = float(child.text)
+        		rax_4 =round( (PI/180) * float(child.text), 4)
         	elif child.attrib == {'class': 'rax_5'}:
-        		rax_5 = float(child.text)
+        		rax_5 =round( (PI/180) * float(child.text), 4)
         	elif child.attrib == {'class': 'rax_6'}:
-        		rax_6 = float(child.text)
+        		rax_6 =round( (PI/180) * float(child.text), 4)
         	elif child.attrib == {'class': 'eax_a'}:
-        		eax_a = float(child.text)
+        		eax_a =round( (PI/180) * float(child.text), 4)
 
-        jointtarget = [rax_1, rax_2, rax_3, rax_4, rax_5, rax_6, eax_a]#, [eax_a, '9E+09', '9E+09', '9E+09', '9E+09', '9E+09']] # eax_b, eax_c, eax_d, eax_e, eax_f]]
-		
+        jointtarget = [rax_1, rax_2, eax_a,rax_3, rax_4, rax_5, rax_6]#, [eax_a, '9E+09', '9E+09', '9E+09', '9E+09', '9E+09']] # eax_b, eax_c, eax_d, eax_e, eax_f]]
         return jointtarget
 
     def getRobtarget(self, mechUnit='ROB_L'):
@@ -319,8 +319,10 @@ class RWSwrapper:
 # =============================================================
 # # Usage Example:
 
-# rws = RWSwrapper()
+rws = RWSwrapper()
 
+# print(rws.getJointtarget())
+# print(rws.getJointtarget('ROB_R'))
 # Set the Flexpendant to "Manual Mode", and Set motors to "ON"
 
 # if(rws.connect()):
@@ -329,3 +331,6 @@ class RWSwrapper:
 # print(rws.getLeadThroughStatus("ROB_R")) # ROB_L
 
 # # rws.deactivateLeadThrough("ROB_R")
+
+# ROB_L_HOME = [0.0, -2.2688, 2.356, 0.5238, -0.0, 0.6994, -0.0004]
+# ROB_R_HOME = [-0.0002, -2.2689, -2.3562, 0.5238, -0.0, 0.699, -0.0003]
