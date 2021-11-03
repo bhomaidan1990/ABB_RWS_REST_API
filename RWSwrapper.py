@@ -319,7 +319,7 @@ class RWSwrapper:
 # =============================================================
 # # Usage Example:
 
-rws = RWSwrapper()
+# rws = RWSwrapper()
 
 # print(rws.getJointtarget())
 # print(rws.getJointtarget('ROB_R'))
