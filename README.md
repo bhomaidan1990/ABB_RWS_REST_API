@@ -15,8 +15,9 @@ rws = RWS()
 # connect and activate LeadThrough:
 
 if(rws.connect()):
+    # activate LeadThrough Mode for Right Arm
     rws.activateLeadThrough("ROB_R") # ROB_L
-
+# check status
 print(rws.getLeadThroughStatus("ROB_R")) # ROB_L
 ```
 To deactivate Lead Through Mode:
@@ -25,8 +26,12 @@ To deactivate Lead Through Mode:
 import RWSwrapper as RWS
 
 rws = RWS()
-# deactivate LeadThrough Mode
-rws.deactivateLeadThrough("ROB_R")
+# connect and activate LeadThrough:
+if(rws.connect()):
+    # deactivate LeadThrough Mode for Right Arm
+    rws.deactivateLeadThrough("ROB_R") # ROB_L
+# check status
+print(rws.getLeadThroughStatus("ROB_R")) # ROB_L
 ```
 
 ## Note:

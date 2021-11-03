@@ -5,7 +5,7 @@
 | Belal HMEDAN, LIG lab/ Marven Team, France, 2021.
 | RWS4YuMi API.
 '''
-from requests import get
+from requests import get, Session
 from requests.auth import HTTPDigestAuth
 import xml.etree.ElementTree as ET
 
@@ -27,8 +27,8 @@ class RWS4YuMi():
 		self.host = host
 		self.username = username
 		self.password = password
-        self.session = Session() # create persistent HTTP communication
-        self.session.auth = HTTPDigestAuth(self.username, self.password)
+		self.session = Session() # create persistent HTTP communication
+		self.session.auth = HTTPDigestAuth(self.username, self.password)
 
 	def actionStatus(self):
 		"""

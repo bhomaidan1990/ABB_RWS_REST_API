@@ -230,6 +230,92 @@ class RWSwrapper:
         else:
             print('Could not set LeadThrough Mode')
             return False
+
+    def getJointtarget(self, mechUnit='ROB_L'):
+        """
+        Function: getJointtarget, to get the robot robtarget.
+        ---
+        Parameters:
+        @param: mechUnit, string, 'ROB_L' or 'ROB_R'.
+        ---
+        @return: jointtarget, list of joint values, jointtarget.
+        TODO check if the values in Radian or Degree
+        """
+        URI = self.REST_URI+"/rw/motionsystem/mechunits/"+mechUnit+"/jointtarget"
+
+        resp = self.session.get(URI)
+        if(resp.status_code != 200):
+            print("Exit with Request Error Code: ", resp.status_code)
+            return False
+        tree = ET.fromstring(resp.content)
+
+        for child in tree[1].iter('*'):
+        	if   child.attrib == {'class': 'rax_1'}:
+        		rax_1 = float(child.text)
+        	elif child.attrib == {'class': 'rax_2'}:
+        		rax_2 = float(child.text)
+        	elif child.attrib == {'class': 'rax_3'}:
+        		rax_3 = float(child.text)
+        	elif child.attrib == {'class': 'rax_4'}:
+        		rax_4 = float(child.text)
+        	elif child.attrib == {'class': 'rax_5'}:
+        		rax_5 = float(child.text)
+        	elif child.attrib == {'class': 'rax_6'}:
+        		rax_6 = float(child.text)
+        	elif child.attrib == {'class': 'eax_a'}:
+        		eax_a = float(child.text)
+
+        jointtarget = [rax_1, rax_2, rax_3, rax_4, rax_5, rax_6, eax_a]#, [eax_a, '9E+09', '9E+09', '9E+09', '9E+09', '9E+09']] # eax_b, eax_c, eax_d, eax_e, eax_f]]
+		
+        return jointtarget
+
+    def getRobtarget(self, mechUnit='ROB_L'):
+        """
+        Function: getRobtarget, to get the robot robtarget.
+        ---
+        Parameters:
+        @param: mechUnit, string, 'ROB_L' or 'ROB_R'.
+        ---
+        @return: robtarget, list of lists, robtarget.
+        """
+        URI = self.REST_URI+"/rw/motionsystem/mechunits/"+mechUnit+"/robtarget"
+
+        resp = self.session.get(URI)
+        if(resp.status_code != 200):
+            print("Exit with Request Error Code: ", resp.status_code)
+            return False
+
+        tree = ET.fromstring(resp.content)
+
+        for child in tree[1].iter('*'):
+            if child.attrib == {'class': 'x'}:
+                x = float(child.text)
+            elif child.attrib == {'class': 'y'}:
+                y = float(child.text)
+            elif child.attrib == {'class': 'z'}:
+                z = float(child.text)
+            elif child.attrib == {'class': 'q1'}:
+                q1 = float(child.text)
+            elif child.attrib == {'class': 'q2'}:
+                q2 = float(child.text)
+            elif child.attrib == {'class': 'q3'}:
+                q3 = float(child.text)
+            elif child.attrib == {'class': 'q4'}:
+                q4 = float(child.text)
+            elif child.attrib == {'class': 'cf1'}:
+                cf11 = float(child.text)
+            elif child.attrib == {'class': 'cf4'}:
+                cf14 = float(child.text)
+            elif child.attrib == {'class': 'cf6'}:
+                cf16 = float(child.text)
+            elif child.attrib == {'class': 'cfx'}:
+                cf1x = float(child.text)
+            elif child.attrib == {'class': 'eax_a'}:
+                eax_a = float(child.text)
+
+        robtarget = [[x, y, z], [q1, q2, q3, q4], [cf11, cf14, cf16, cf1x], [eax_a, '9E+09', '9E+09', '9E+09', '9E+09', '9E+09']] # eax_b, eax_c, eax_d, eax_e, eax_f]]
+		
+        return robtarget
 # =============================================================
 # # Usage Example:
 
