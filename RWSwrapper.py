@@ -219,7 +219,6 @@ class RWSwrapper:
         ROB_L, ROB_R
         """
         if(self.connect()):
-            self.requestMastership()
             payload = {'status': 'inactive'}
             URI = "/rw/motionsystem/mechunits/"+mechUnit
             print(URI)
