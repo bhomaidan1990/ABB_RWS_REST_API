@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 '''
 | author:
-| Belal HMEDAN, LIG lab/ Marven Team, France, 2021.
+| Belal HMEDAN, LIG lab/ Marvin Team, France, 2021.
 | RWSwrapper API.
 '''
 import requests
