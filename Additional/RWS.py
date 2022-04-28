@@ -3,7 +3,7 @@
 '''
 | author link: https://github.com/prinsWindy/ABB-Robot-Machine-Vision/blob/master/RobotWebServices/RWS.py
 | modifier:
-| Belal HMEDAN, LIG lab/ Marven Team, France, 2021.
+| Belal HMEDAN, LIG lab/ Marvin Team, France, 2021.
 | RWS4YuMi API.
 '''
 
